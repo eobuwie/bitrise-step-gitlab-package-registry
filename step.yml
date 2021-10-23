@@ -1,0 +1,89 @@
+title: |-
+  GitLab Package Registry
+summary: |
+  Upload your binary to GitLab Package Registry.
+description: |
+  Upload your binary to GitLab Package Registry.
+website: https://github.com/orbitekk/bitrise-step-gitlab-package-registry.git
+source_code_url: https://github.com/orbitekk/bitrise-step-gitlab-package-registry.git
+support_url: https://github.com/orbitekk/bitrise-step-gitlab-package-registry.git
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+
+project_type_tags:
+  - ios
+  - macos
+
+type_tags:
+  - deploy
+
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+  - name:
+    opts:
+      title: "Framework name"
+      summary: ""
+      description: |
+        The name of the archived library.
+      is_required: true
+  - version: $APP_VERSION
+    opts:
+      title: "Framework version"
+      summary: ""
+      description: |
+        The version of the uploaded binary.
+      is_required: true
+  - path:
+    opts:
+      title: "GitLab project path"
+      summary: ""
+      description: |
+        URL-encoded project path
+      is_required: true
+  - type: "generic"
+    opts:
+      title: "Package type"
+      summary: ""
+      description: |
+        Package type
+      is_required: true
+  - input_dir: $BITRISE_DEPLOY_DIR
+    opts:
+      title: Input directory path
+      summary: The directory containing the generated artifact.
+      is_required: true
+  - api_base_url: $GITLAB_API_URL
+    opts:
+      title: "GitLab API base url"
+      summary: ""
+      description: |-
+        API URL for GitLab or GitLab Enterprise
+        Example: "https://gitlab.example.com/api/v4"
+      is_required: true
+  - token: ""
+    opts:
+      title: "GitLab private token"
+      summary: ""
+      description: |-
+        Authorization token for GitLab applications
+        Generating a personal access token:
+        1. Log in to your GitLab instance.
+        2. Go to User Settings > Access Tokens.
+        3. Pick a _name_ and set a _scope_ for the token.
+        4. Click on **Create personal access token** and save your new token.
+      is_required: true
+      is_sensitive: true
+
+outputs:
+  - ARTIFACT_URL:
+    opts:
+      title: URL to file
